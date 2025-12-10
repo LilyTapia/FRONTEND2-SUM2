@@ -1,0 +1,57 @@
+# Colomba · Centro de eventos (React + Vite + Tailwind)
+
+SPA que consume un backend mock (REST y GraphQL) para listar eventos y ver sus detalles. Incluye gestión local de “entradas guardadas” (localStorage) y UI responsive.
+
+## Estructura
+- `backend/index.js`: Express + ApolloServer. Endpoints REST `/api/events`, `/api/events/:id` y GraphQL `/graphql`. Catálogo mock con imágenes oficiales de Puntoticket.
+- `frontend/src/api/events.js`: llamadas REST/GraphQL.
+- `frontend/src/context/EventContext.jsx`: estado global (eventos, loading/error, guardados en localStorage, stats).
+- `frontend/src/components/`: Navbar, EventCard.
+- `frontend/src/pages/`: Home, AllEvents (cartelera con filtros), EventDetail, MyTickets.
+- `frontend/src/utils/eventMedia.js`: fallback de imágenes por categoría.
+
+## Requisitos previos
+- Node 18+.
+
+## Instalación
+```bash
+cd backend
+npm install
+cd ../frontend
+npm install
+```
+
+## Ejecución en desarrollo
+En dos terminales:
+```bash
+# Terminal 1: backend
+cd backend
+node index.js
+
+# Terminal 2: frontend
+cd frontend
+npm run dev
+```
+Frontend suele quedar en `http://localhost:5173`, backend en `http://localhost:4000`.
+
+## Scripts
+- Frontend: `npm run dev`, `npm run build`, `npm run preview`, `npm run lint`.
+- Backend: no tiene scripts; se ejecuta con `node index.js`.
+
+## Endpoints mock
+- REST listado: `GET http://localhost:4000/api/events`
+- REST detalle: `GET http://localhost:4000/api/events/:id`
+- GraphQL: `POST http://localhost:4000/graphql`
+
+## Notas de funcionalidad
+- Cartelera (`/agenda`): filtros por categoría y búsqueda por nombre/ubicación (REST).
+- Detalle (`/evento/:id`): consulta principal por GraphQL con fallback REST; muestra imagen, organizador, aforo y ocupación.
+- Guardados (`/mis-pases`): usa localStorage; botón “Cancelar reserva” en coral sólido.
+- Navbar: acceso directo a cartelera y mis entradas; contador de guardados.
+
+## Pruebas rápidas sugeridas
+- Navegadores: Chrome/Firefox desktop. Verificar carga de imágenes y navegación.
+- Responsive: revisar navbar/hero/cards en mobile/tablet.
+
+## Licencia
+Uso académico/demostrativo (mock). Imágenes referenciales de Puntoticket.***
